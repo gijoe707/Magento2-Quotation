@@ -302,7 +302,7 @@ class Cart extends \Magento\Checkout\Model\Cart
      */
     public function submit(){
         $quote = $this->getQuote();
-        $this->quotationSession->setLastRealQuote($quote);
+        $this->quotationSession->setLastRealQuote($quote->getId());
         $this->quotationSession->setLastSuccessQuoteId($quote->getId());
         $this->quotationManagement->submit($quote);
         return $this;

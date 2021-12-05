@@ -9,7 +9,7 @@ namespace Magestore\Quotation\Block\Cart\Info\Address;
  * Class Shipping
  * @package Magestore\Quotation\Block\Cart\Info\Address
  */
-class Shipping extends \Magestore\Quotation\Block\Cart\Info\Address
+class Shipping extends \Magestore\Quotation\Block\Cart\Info\_Address
 {
     /**
      * Prepare the layout of the address edit block.
