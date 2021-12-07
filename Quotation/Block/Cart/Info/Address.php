@@ -5,16 +5,14 @@
  */
 namespace Magestore\Quotation\Block\Cart\Info;
 
-use Magento\Customer\Api\AddressMetadataInterface;
-use Magento\Customer\Helper\Address;
+use Magento\Customer\Model\AttributeChecker;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\App\ObjectManager;
 
 /**
  * Class Address
  * @package Magestore\Quotation\Block\Cart\Info
  */
-class _Address extends \Magento\Customer\Block\Address\Edit
+class Address extends \Magento\Customer\Block\Address\Edit
 {
     /**
      * @var \Magestore\Quotation\Model\Cart
@@ -39,7 +37,6 @@ class _Address extends \Magento\Customer\Block\Address\Edit
      * @param AttributeChecker|null $attributeChecker
      */
     public function __construct(
-
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Directory\Helper\Data $directoryHelper,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
@@ -53,18 +50,8 @@ class _Address extends \Magento\Customer\Block\Address\Edit
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
         \Magestore\Quotation\Model\Cart $quotationCart,
         array $data = [],
-        AddressMetadataInterface $addressMetadata = null,
-        Address $addressHelper = null
+        \Magento\Customer\Model\AttributeChecker $attributeChecker = null
     ) {
-        $this->_customerSession = $customerSession;
-        $this->_addressRepository = $addressRepository;
-        $this->addressDataFactory = $addressDataFactory;
-        $this->currentCustomer = $currentCustomer;
-        $this->dataObjectHelper = $dataObjectHelper;
-        #$this->addressMetadata = $addressMetadata ?: ObjectManager::getInstance()->get(AddressMetadataInterface::class);
-        $data['addressHelper'] = $addressHelper ?: ObjectManager::getInstance()->get(Address::class);
-        $data['directoryHelper'] = $directoryHelper;
-        $this->quotationCart = $quotationCart;
         parent::__construct(
             $context,
             $directoryHelper,
@@ -76,8 +63,11 @@ class _Address extends \Magento\Customer\Block\Address\Edit
             $addressRepository,
             $addressDataFactory,
             $currentCustomer,
-            $dataObjectHelper
+            $dataObjectHelper,
+            $data,
+            $attributeChecker
         );
+        $this->quotationCart = $quotationCart;
     }
 
     /**
