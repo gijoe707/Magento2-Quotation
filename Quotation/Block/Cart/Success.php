@@ -64,7 +64,7 @@ class Success extends \Magento\Checkout\Block\Onepage\Success
      */
     protected function prepareBlockData()
     {
-        $quote = $this->quotationSession->getQuote();
+        $quote = $this->quotationSession->getLastRealQuote();
         $this->addData(
             [
                 'view_quote_url' => $this->getUrl(
